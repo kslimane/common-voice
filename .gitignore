@@ -26,3 +26,9 @@ nubis/builder/artifacts/*
 
 # WebStorm
 .idea/
+
+### Ignore all sentences files except one FR. To reduce repo size.
+server/data/*
+!server/data/fr
+server/data/fr
+!server/data/fr/assemblee-nationale_20131018213000000.txt
