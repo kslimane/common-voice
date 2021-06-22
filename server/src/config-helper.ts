@@ -173,7 +173,20 @@ export function getConfig(): CommonVoiceConfig {
       `Could not load config.json, using defaults (error message: ${err.message})`
     );
   }
-  loadedConfig = { ...BASE_CONFIG, ...loadedSecrets, ...fileConfig };
+
+  // adding config from env vars
+  let envConfig: Partial<CommonVoiceConfig>;
+
+  envConfig = {
+    SERVER_PORT: parseInt(process.env.PORT),
+    MYSQLHOST: process.env.MYSQLHOST,
+    DB_ROOT_USER: process.env.DB_ROOT_USER,
+    DB_ROOT_PASS: process.env.DB_ROOT_PASS,
+    MYSQLUSER: process.env.MYSQLUSER,
+    MYSQLPASS: process.env.MYSQLPASS
+  }
+
+  loadedConfig = { ...BASE_CONFIG, ...loadedSecrets, ...fileConfig, ...envConfig };
 
   return loadedConfig;
 }
